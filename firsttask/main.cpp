@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "stack.h"
+#include "stackclasses.h"
 
 using namespace std;
 
@@ -87,6 +87,10 @@ int main()
 */
 \
 
+
+
+/*
+#include <stack.h> ili <massivestack.h>
 int main ()
 {
     char val = 0;
@@ -100,5 +104,47 @@ int main ()
         cout << pop(stack) << endl;
     deleteStack(stack);
 
+    return 0;
+}
+*/
+
+
+
+int main ()
+{
+    cout << "Please, for massivestack tape '1' for pointerstack tape '2'" <<endl;
+    int variant;
+    cin >> variant;
+    cout << "Please, type digit till =" <<endl;
+    switch (variant)
+    {
+    case 1:
+    {
+        stack *massivstack = new MassivStack();
+        char val = 0;
+        while (cin >> val, val != '=')
+        {
+            if (val != ' ')
+                massivstack->push(val);
+        }
+        while (!massivstack->emptyStack())
+            cout << massivstack->pop() << endl;
+    }
+    break;
+    case 2:
+    {
+        stack *pointerstack = new PointerStack();
+        char val = 0;
+        while (cin >> val, val != '=')
+        {
+            if (val != ' ')
+                pointerstack->push(val);
+        }
+        while (!pointerstack->emptyStack())
+            cout << pointerstack->pop() << endl;
+    }
+    break;
+    default: cout << "ERROR" ;
+    }
     return 0;
 }
