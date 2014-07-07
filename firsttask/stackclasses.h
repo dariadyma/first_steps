@@ -45,7 +45,7 @@ class PointerStack: public stack
 class Calculator
 {
 public:
-    Calculator();
+    Calculator(stack *calc);
     void calculator(char c);
     int result();
     virtual ~Calculator(){}

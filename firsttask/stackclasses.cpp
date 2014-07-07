@@ -71,9 +71,9 @@ PointerStack::~PointerStack()
 
 
 
-Calculator::Calculator()
+Calculator::Calculator(stack *calc)
 {
-   calc = new PointerStack();
+   this->calc = calc;
 }
 
 

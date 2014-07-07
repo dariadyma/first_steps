@@ -148,7 +148,8 @@ int main ()
 
     case 3:
     {
-        Calculator *calcul = new Calculator();
+        stack *typestack = new PointerStack();
+        Calculator *calcul = new Calculator(typestack);
         char val = 0;
         while (cin >> val, val != '=')
             calcul->calculator(val);
