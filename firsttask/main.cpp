@@ -112,10 +112,10 @@ int main ()
 
 int main ()
 {
-    cout << "Please, for massivestack tape '1' for pointerstack tape '2'" <<endl;
+    cout << "Please, for massivestack tape '1', for pointerstack tape '2', for stackcalculator tape '3'" <<endl;
     int variant;
     cin >> variant;
-    cout << "Please, type digit till =" <<endl;
+    cout << "Please, type symbols till =" <<endl;
     switch (variant)
     {
     case 1:
@@ -131,6 +131,7 @@ int main ()
             cout << massivstack->pop() << endl;
     }
     break;
+
     case 2:
     {
         stack *pointerstack = new PointerStack();
@@ -144,6 +145,17 @@ int main ()
             cout << pointerstack->pop() << endl;
     }
     break;
+
+    case 3:
+    {
+        Calculator *calcul = new Calculator();
+        char val = 0;
+        while (cin >> val, val != '=')
+            calcul->calculator(val);
+        cout << calcul->result();
+    }
+    break;
+
     default: cout << "ERROR" ;
     }
     return 0;
