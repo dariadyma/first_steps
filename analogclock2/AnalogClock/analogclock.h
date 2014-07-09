@@ -1,24 +1,21 @@
-#ifndef ANALOGCLOCK_H
- #define ANALOGCLOCK_H
+#pragma once
 
- #include <QWidget>
+#include <QWidget>
 
- class AnalogClock : public QWidget
- {
-     Q_OBJECT
+/// Makes clock, which shows time
+class AnalogClock : public QWidget
+{
+    Q_OBJECT
 
- public:
-     AnalogClock(QWidget *parent = 0);
-     void GMT_on (bool checkGMT);
+public:
+    AnalogClock(QWidget *parent = 0);
 
- protected:
-     void paintEvent(QPaintEvent *event);
+    /// Checks if GMT on or not
+    void GMTon (bool checkGMT);
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
 
 private:
-     bool checkGMT = false;
- };
-
- #endif
-
-
-
+    bool mCheckGMT = false;
+};

@@ -1,7 +1,6 @@
-#include <QtGui>
-
-
 #include "analogclock.h"
+
+#include <QtGui>
 
 AnalogClock::AnalogClock(QWidget *parent)
     : QWidget(parent)
@@ -15,18 +14,18 @@ AnalogClock::AnalogClock(QWidget *parent)
 
 }
 
-void AnalogClock::GMT_on (bool checkgmt)
+void AnalogClock::GMTon (bool checkgmt)
 {
-    checkGMT = checkgmt;
+    mCheckGMT = checkgmt;
 }
 
-void AnalogClock::paintEvent(QPaintEvent *)
-{
+void AnalogClock::paintEvent(QPaintEvent *){
     static const QPoint hourHand[3] = {
         QPoint(7, 8),
         QPoint(-7, 8),
         QPoint(0, -40)
     };
+
     static const QPoint minuteHand[3] = {
         QPoint(7, 8),
         QPoint(-7, 8),
@@ -40,7 +39,7 @@ void AnalogClock::paintEvent(QPaintEvent *)
 
     QTime time = QTime::currentTime();
 
-    if (checkGMT)
+    if (mCheckGMT)
        time = QDateTime::currentDateTimeUtc().time();
 
     QPainter painter(this);

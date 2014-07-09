@@ -2,23 +2,31 @@
 #include "ui_mainwindow.h"
 #include "analogclock.h"
 
+#include <QVBoxLayout>
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    mUi(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    QObject::connect(ui->checkBox, &QCheckBox::clicked, this, &MainWindow::changeGMT);
+    mUi->setupUi(this);
+    QObject::connect(mUi->checkBox, &QCheckBox::clicked, this, &MainWindow::changeGMT);
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(mClock);
+    layout->addWidget(mUi->checkBox);
+    this->centralWidget()->setLayout(layout);
 }
 
 
 void MainWindow::changeGMT()
 {
-    clock->GMT_on(ui->checkBox->isChecked());
+    mClock->GMTon(mUi->checkBox->isChecked());
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete mUi;
 }
 
 

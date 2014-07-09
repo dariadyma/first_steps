@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include "analogclock.h"
@@ -8,23 +7,20 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+/// Parent class for clocks and it contains GMT button
+class MainWindow : public QMainWindow{
     Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
-    AnalogClock *clock = new AnalogClock(this);
-
-
+    ~MainWindow() override;
 
 public slots:
+
+    /// Check changes on button GMT
     void changeGMT();
 
+private:
+    Ui::MainWindow *mUi;
+    AnalogClock *mClock = new AnalogClock(this);
 };
-
-#endif // MAINWINDOW_H
