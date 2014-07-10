@@ -15,12 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         cannon.cpp \
     gun.cpp \
-    ball.cpp
+    ball.cpp \
+    target.cpp
 
 CONFIG += c++11
 
 HEADERS  += cannon.h \
     gun.h \
-    ball.h
+    ball.h \
+    target.h
 
 FORMS    += cannon.ui
