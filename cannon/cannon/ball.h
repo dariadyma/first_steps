@@ -1,31 +1,42 @@
 #pragma once
 
-#include <QGraphicsItem>
-#include <QGraphicsScene>
-#include <QPainter>
+#include <QtWidgets/QGraphicsItem>
+#include <QtWidgets/QGraphicsScene>
+#include <QtGUI/QPainter>
 #include <iostream>
-#include <QTime>
-
+#include <QtCore/QTime>
 
 class Ball: public QGraphicsItem
 {
 public:
-     QRectF boundingRect() const override;
-     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                QWidget *widget) override;
-     Ball();
-     void speedChange (int speedchange);
-     void startChange (bool startchange);
-     void angleChange (double anglechange);
-     double XBall();
-     double YBall();
-     void stopBall();
+	 Ball();
+	 QRectF boundingRect() const override;
+	 void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+
+	 /// Change speed of ball.
+	 void speedChange (int speed);
+
+	 /// Button was pressed so ball start moving.
+	 void startChange (bool start);
+
+	 /// Stop the ball.
+	 void stopBall();
+
+	 /// Cause of changing angle of gun the begin position of ball changes.
+	 void angleChange (double angle);
+
+	 /// Returns x-coordinate of ball.
+	 double xBall() const;
+
+	 /// Returns y-coordinate of ball.
+	 double yBall() const;
 
 private:
-    int mSpeed = 0;
-    bool mStart = false;
-    double mAngle = 0;
-    QTime time = QTime();
-    double mXBall = 0, mYBall = 0;
+	int mSpeed = 0;
+	bool mStart = false;
+	double mAngle = 0;
+	QTime mTime = QTime();
+	double mXBall = 0;
+	double mYBall = 0;
 };
 

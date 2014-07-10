@@ -1,75 +1,76 @@
+#include <QtCore/QTimer>
+
 #include "cannon.h"
 #include "ui_cannon.h"
-#include <QTimer>
 
 Cannon::Cannon(QWidget *parent) :
-    QMainWindow(parent),
-    mUi(new Ui::Cannon)
+	QMainWindow(parent),
+	mUi(new Ui::Cannon)
 {
-    mUi->setupUi(this);
+	mUi->setupUi(this);
 
-    QObject::connect(mUi->Angl, static_cast<void (QDoubleSpinBox:: *)(double)>(
-                     &QDoubleSpinBox::valueChanged), this, &Cannon::angleChange);
-    QObject::connect(mUi->Speed, static_cast<void (QSpinBox:: *)(int)>(
-                     &QSpinBox::valueChanged), this, &Cannon::speedChange);
-    QObject::connect(mUi->pushButton, &QPushButton::clicked, this, &Cannon::startChange);
+	QObject::connect(mUi->Angl, static_cast<void (QDoubleSpinBox:: *)(double)>(
+			 &QDoubleSpinBox::valueChanged), this, &Cannon::angleChange);
+	QObject::connect(mUi->Speed, static_cast<void (QSpinBox:: *)(int)>(
+			 &QSpinBox::valueChanged), this, &Cannon::speedChange);
+	QObject::connect(mUi->pushButton, &QPushButton::clicked, this, &Cannon::startChange);
 
-    scen->addItem(mGun);
-    scen->addItem(mBall);
-    scen->addItem(mTarget);
-    mUi->graphicsView->setScene(scen);
+	mScen->addItem(mGun);
+	mScen->addItem(mBall);
+	mScen->addItem(mTarget);
+	mUi->graphicsView->setScene(mScen);
 
-    QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Cannon::scenUpDate);
-    timer->start(10);
+	QTimer *timer = new QTimer(this);
+	connect(timer, &QTimer::timeout, this, &Cannon::scenUpDate);
+	timer->start(10);
 }
 
-void Cannon::scenUpDate ()
+void Cannon::scenUpDate()
 {
-     scen->update() ;
-     if ((mBall->XBall() ) <= (mTarget->XTarget() + 20) &&
-             (mBall->XBall() + 5 ) >= (mTarget->XTarget() - 20) &&
-             (mBall->YBall() ) <= (mTarget->YTarget() + 20) &&
-             (mBall->YBall() + 5 ) >= (mTarget->YTarget() - 20) )
-     {
-        mUi->label_3->setText("YOU WIN!");
-        mBall->stopBall();
-        mTarget->stopTarget();
-        mTarget->speedChange(1);
+	 mScen->update() ;
 
-     }
-     if ((mTarget->XTarget() + 20) >= 820)
-     {
-         mUi->label_3->setText("YOU LOSE!");
-         mTarget->stopTarget();
-         mTarget->speedChange(-1);
-     }
+	 if ((mBall->xBall() ) <= (mTarget->xTarget() + 20)
+			 && (mBall->xBall() + 5 ) >= (mTarget->xTarget() - 20)
+			 && (mBall->yBall() ) <= (mTarget->yTarget() + 20)
+			 && (mBall->yBall() + 5 ) >= (mTarget->yTarget() - 20))
+	 {
+		mUi->label_3->setText("YOU WIN!");
+		mBall->stopBall();
+		mTarget->stopTarget();
+		mTarget->speedChange(1);
+	 }
 
+	 if ((mTarget->xTarget() + 20) >= 820)
+	 {
+		 mUi->label_3->setText("YOU LOSE!");
+		 mTarget->stopTarget();
+		 mTarget->speedChange(-1);
+	 }
 }
 
-void Cannon::angleChange ()
+void Cannon::angleChange()
 {
-    mGun->angleChange(mUi->Angl->value());
-    mBall->angleChange(mUi->Angl->value());
-    scen->update() ;
+	mGun->angleChange(mUi->Angl->value());
+	mBall->angleChange(mUi->Angl->value());
+	mScen->update() ;
 }
 
-void Cannon::speedChange ()
+void Cannon::speedChange()
 {
-    mBall->speedChange(mUi->Speed->value());
+	mBall->speedChange(mUi->Speed->value());
 }
 
-void Cannon::startChange ()
+void Cannon::startChange()
 {
-    mBall->startChange(mUi->pushButton->isFlat());
-    mUi->label_3->setText("");
+	mBall->startChange(mUi->pushButton->isFlat());
+	mUi->label_3->setText("");
 }
 
 Cannon::~Cannon()
 {
-    delete mUi;
-    delete mGun;
-    delete mTarget;
-    delete mBall;
-    delete scen;
+	delete mUi;
+	delete mGun;
+	delete mTarget;
+	delete mBall;
+	delete mScen;
 }
